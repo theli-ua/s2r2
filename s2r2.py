@@ -494,9 +494,9 @@ class ReplayManager:
                     who = ord(z[1])
                     print '%s[%d=>%d]%s' % (pre,who,x,msg)
                 elif z[0] == '5':
-                    print 'spawn?\n' ,dump(z)
+                    print 'wtf1?\n' ,dump(z)
                 else:
-                    print 'xx :\n',dump(z)
+                    print 'wtf2?:\n',dump(z)
         count = self.read_int()
         for i in xrange(count):
             x = self.read_int()
