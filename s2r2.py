@@ -476,19 +476,27 @@ class ReplayManager:
             if y > 0:
                 z = self.replaydata.read(y)
                 #print dump(z)
-                if z[0] == chr(2) or z[0] == chr(3) or z[0] == chr(0):#0x28): #<- system message
-                    msg = z[4:z.index('\0',5)]
-                    who = struct.unpack("<i",z[1:5])[0]
-                    #who = string_sets[2][`who`] #wrong :(
+                #if z[0] == chr(2) or z[0] == chr(3) or z[0] == chr(0):#0x28): #<- system message
+                    #msg = z[4:z.index('\0',5)]
+                    #who = struct.unpack("<i",z[1:5])[0]
+                    ##who = string_sets[2][`who`] #wrong :(
+                    #if z[0] == chr(3):
+                        #pre = '[TEAM]'
+                    #else:
+                        #pre = '[ALL]'
+                    ##print '[][]%s[%d=>%d]%s' % (pre,who,x,msg)
+                if z[0] in [chr(3), chr(2)]:
                     if z[0] == chr(3):
                         pre = '[TEAM]'
                     else:
                         pre = '[ALL]'
-                    print '[][]%s[%d=>%d]%s' % (pre,who,x,msg)
+                    msg = z[2:z.index('\0',3)]
+                    who = ord(z[1])
+                    print '%s[%d=>%d]%s' % (pre,who,x,msg)
                 elif z[0] == '5':
-                    print 'spawn?' ,dump(z)
+                    print 'spawn?\n' ,dump(z)
                 else:
-                    print 'xx :',dump(z)
+                    print 'xx :\n',dump(z)
         count = self.read_int()
         for i in xrange(count):
             x = self.read_int()
